@@ -28,6 +28,7 @@ public class Book {
     private String author;
     private String description;
     private int publishYear;
+    private double rating;
 
     @CreatedDate
     private ZonedDateTime createdAt;

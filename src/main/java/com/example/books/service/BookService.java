@@ -3,10 +3,12 @@ package com.example.books.service;
 import com.example.books.dto.request.BookRequest;
 import com.example.books.entity.Book;
 import com.example.books.repository.BookRepository;
+import com.example.books.specification.BookFilter;
+import com.example.books.specification.BookSpecification;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -51,14 +53,8 @@ public class BookService {
                 .orElseThrow(()-> new EntityNotFoundException("book not found with id: " + id));
     }
 
-    public Page<Book> getAllBooks (PageRequest pageRequest, String contains) {
-        if (contains == null){
-            return bookRepository.findAll(pageRequest);
-        } else{
-            return bookRepository.findByTitleContainingIgnoreCase(pageRequest, contains);
-        }
-
+    public Page<Book> getAllBooks (BookFilter bookFilter, Pageable pageable) {
+        BookSpecification spec = new BookSpecification(bookFilter);
+            return bookRepository.findAll(spec, pageable);
     }
-
-
 }
