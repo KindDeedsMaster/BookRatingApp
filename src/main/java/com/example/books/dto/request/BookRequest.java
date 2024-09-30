@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BookRequest {
     private String title;
-    private String description;
+    private String genre;
     private String author;
     private int publishYear;
 }

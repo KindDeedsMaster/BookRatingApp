@@ -22,7 +22,7 @@ public class BookService {
     public Book createBook (BookRequest bookRequest){
         Book book = Book.builder()
                 .title(bookRequest.getTitle())
-                .description(bookRequest.getDescription())
+                .genre(bookRequest.getGenre())
                 .author(bookRequest.getAuthor())
                 .publishYear(bookRequest.getPublishYear())
                 .build();
@@ -44,7 +44,7 @@ public class BookService {
         );
         bookToUpdate.setTitle(request.getTitle());
         bookToUpdate.setAuthor(request.getAuthor());
-        bookToUpdate.setDescription(request.getDescription());
+        bookToUpdate.setGenre(request.getGenre());
         bookRepository.save(bookToUpdate);
         return bookToUpdate;
     }

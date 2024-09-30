@@ -7,6 +7,7 @@ import com.example.books.repository.RatingRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,6 +19,7 @@ public class RatingService {
     private final RatingRepository ratingRepository;
     private final BookRepository bookRepository;
 
+    @Transactional
     public Book rateBook(UUID bookId, int rating) {
         Book book = bookService.getBookById(bookId);
         Rating r = new Rating(book, rating);
