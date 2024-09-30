@@ -3,6 +3,7 @@ package com.example.books.controller;
 import com.example.books.dto.request.BookRequest;
 import com.example.books.entity.Book;
 import com.example.books.service.BookService;
+import com.example.books.service.RatingService;
 import com.example.books.specification.BookFilter;
 import jakarta.annotation.Nonnull;
 import jakarta.validation.constraints.Min;
@@ -23,6 +24,7 @@ import java.util.UUID;
 public class BookController {
 
     private final BookService bookService;
+    private final RatingService ratingService;
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Book> getBook(@PathVariable @Nonnull UUID id) {
@@ -32,7 +34,7 @@ public class BookController {
 
     @GetMapping
     public ResponseEntity<Page<Book>> findAllBooks(@ModelAttribute BookFilter filter, Pageable pageable) {
-        return ResponseEntity.ok().body(bookService.getAllBooks(filter, pageable));
+        return ResponseEntity.ok().body(bookService.getFilteredBooks(filter, pageable));
     }
 
     @PostMapping

@@ -1,14 +1,12 @@
 package com.example.books.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -18,6 +16,8 @@ import java.util.UUID;
 @Builder
 @Data
 @Table(name = "books")
+@EqualsAndHashCode(exclude = {"ratings"})
+@ToString(exclude = {"ratings"})
 public class Book {
 
     @Id
@@ -28,7 +28,10 @@ public class Book {
     private String author;
     private String description;
     private int publishYear;
-    private double rating;
+    private double averageRating;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rating> ratings;
 
     @CreatedDate
     private ZonedDateTime createdAt;

@@ -3,6 +3,7 @@ package com.example.books.service;
 import com.example.books.dto.request.BookRequest;
 import com.example.books.entity.Book;
 import com.example.books.repository.BookRepository;
+import com.example.books.repository.RatingRepository;
 import com.example.books.specification.BookFilter;
 import com.example.books.specification.BookSpecification;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,7 +17,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class BookService {
-    final private BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
     public Book createBook (BookRequest bookRequest){
         Book book = Book.builder()
@@ -53,7 +54,7 @@ public class BookService {
                 .orElseThrow(()-> new EntityNotFoundException("book not found with id: " + id));
     }
 
-    public Page<Book> getAllBooks (BookFilter bookFilter, Pageable pageable) {
+    public Page<Book> getFilteredBooks (BookFilter bookFilter, Pageable pageable) {
         BookSpecification spec = new BookSpecification(bookFilter);
             return bookRepository.findAll(spec, pageable);
     }
