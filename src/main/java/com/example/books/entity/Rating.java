@@ -2,10 +2,10 @@ package com.example.books.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import java.util.UUID;
 
@@ -28,5 +28,7 @@ public class Rating {
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 
+    @Min(value = 1)
+    @Max(value = 5)
     private int rating;
 }
