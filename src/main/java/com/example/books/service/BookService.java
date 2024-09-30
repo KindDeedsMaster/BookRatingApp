@@ -2,6 +2,7 @@ package com.example.books.service;
 
 import com.example.books.dto.request.BookRequest;
 import com.example.books.entity.Book;
+import com.example.books.entity.Rating;
 import com.example.books.repository.BookRepository;
 import com.example.books.specification.BookFilter;
 import com.example.books.specification.BookSpecification;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service

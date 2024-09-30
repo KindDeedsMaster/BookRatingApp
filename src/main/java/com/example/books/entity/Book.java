@@ -6,6 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,8 +31,8 @@ public class Book {
     private int publishYear;
     private double averageRating;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Rating> ratings;
+    @OneToMany(mappedBy = "book", cascade = {CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Rating> ratings = new ArrayList<>();
 
     @CreatedDate
     private ZonedDateTime createdAt;
@@ -48,7 +49,20 @@ public class Book {
         this.modifiedAt = ZonedDateTime.now();
     }
 
+    public void addRating(Rating rating) {
+        ratings.add(rating);
+        rating.setBook(this);
+        changeAverageRating();
+    }
 
-
-
+    public void changeAverageRating() {
+        if (ratings.isEmpty()) {
+            this.averageRating = 0;
+        } else {
+            this.averageRating = ratings.stream()
+                    .mapToDouble(Rating::getRating)
+                    .average()
+                    .orElse(0);
+        }
+    }
 }
