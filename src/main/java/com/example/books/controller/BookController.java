@@ -6,12 +6,9 @@ import com.example.books.service.BookService;
 import com.example.books.service.RatingService;
 import com.example.books.specification.BookFilter;
 import jakarta.annotation.Nonnull;
-import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +21,6 @@ import java.util.UUID;
 public class BookController {
 
     private final BookService bookService;
-    private final RatingService ratingService;
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Book> getBook(@PathVariable @Nonnull UUID id) {

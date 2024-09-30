@@ -34,10 +34,6 @@ public class BookSpecification implements Specification<Book> {
             predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("publishYear"), bookFilter.getMaxYear()));
         }
 
-
-
-
-
         if (bookFilter.getMinRating() != null && bookFilter.getMaxRating() != null) {
             predicates.add(criteriaBuilder.between(root.get("rating"), bookFilter.getMinRating(), bookFilter.getMaxRating()));
         } else if (bookFilter.getMinRating() != null) {

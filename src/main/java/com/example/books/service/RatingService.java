@@ -4,7 +4,6 @@ import com.example.books.entity.Book;
 import com.example.books.entity.Rating;
 import com.example.books.repository.BookRepository;
 import com.example.books.repository.RatingRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

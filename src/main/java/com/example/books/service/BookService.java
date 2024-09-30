@@ -3,7 +3,6 @@ package com.example.books.service;
 import com.example.books.dto.request.BookRequest;
 import com.example.books.entity.Book;
 import com.example.books.repository.BookRepository;
-import com.example.books.repository.RatingRepository;
 import com.example.books.specification.BookFilter;
 import com.example.books.specification.BookSpecification;
 import jakarta.persistence.EntityNotFoundException;
